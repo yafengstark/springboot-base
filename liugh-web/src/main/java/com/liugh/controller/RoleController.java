@@ -10,6 +10,10 @@ import com.liugh.config.ResponseModel;
 import com.liugh.entity.Role;
 import com.liugh.model.RoleModel;
 import com.liugh.service.IRoleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +28,7 @@ import java.util.List;
  * @author liugh123
  * @since 2018-05-03
  */
+@Api(description = "角色模块")
 @RestController
 @RequestMapping("/role")
 public class RoleController {
@@ -34,6 +39,13 @@ public class RoleController {
     /**
      *  角色列表
      */
+    @ApiOperation(value = "获取所有角色", notes = "拥有超级管理员或管理员角色的用户可以访问这个接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageIndex", value = "分页开始"
+                    , required = false, dataType = "Integer",paramType="query"),
+            @ApiImplicitParam(name = "pageSize", value = "页数"
+                    , required = false, dataType = "Integer",paramType="query")
+    })
     @GetMapping("/pageList")
     //拥有超级管理员或管理员角色的用户可以访问这个接口,换成角色控制权限,改变请看MyRealm.class
     //@RequiresRoles(value = {Constant.RoleType.SYS_ASMIN_ROLE,Constant.RoleType.ADMIN},logical =  Logical.OR)
@@ -48,6 +60,7 @@ public class RoleController {
     /**
      *  获取所有角色
      */
+    @ApiOperation(value = "获取所有角色", produces = "application/json")
     @GetMapping("/all")
     public  ResponseModel<List<Role>> getAllRole(){
         return ResponseHelper.buildResponseModel(roleService.selectList(new EntityWrapper<Role>()));
@@ -56,6 +69,14 @@ public class RoleController {
     /**
      * 获取角色详细信息
      */
+    @ApiOperation(value = "获取角色详细信息", produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "path",
+                    name = "roleCode",
+                    dataType = "String",
+                    value = "role-f7943542d87a4f028f446b71d9ede25d",
+            required = true )
+    })
     @GetMapping(value = "/{roleCode}")
     public ResponseModel getById(@PathVariable("roleCode") String roleCode)throws Exception{
         return ResponseHelper.buildResponseModel(roleService.selectByRoleCode(roleCode));
@@ -64,7 +85,16 @@ public class RoleController {
     /**
      * 删除角色
      */
+    @ApiOperation(value = "删除角色", notes = "拥有超级管理员或管理员角色的用户可以访问这个接口",
+            produces = "application/json")
     @DeleteMapping(value = "/{roleCode}")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "path",
+                    name = "roleCode",
+                    dataType = "String",
+                    value = "role-f7943542d87a4f028f446b71d9ede25d",
+                    required = true )
+    })
     //拥有超级管理员或管理员角色的用户可以访问这个接口,换成角色控制权限,改变请看MyRealm.class
     //@RequiresRoles(value = {Constant.RoleType.SYS_ASMIN_ROLE,Constant.RoleType.ADMIN},logical =  Logical.OR)
     public ResponseModel deleteRole(@PathVariable("roleCode") String roleCode)throws Exception{
@@ -77,6 +107,7 @@ public class RoleController {
      * @param roleModel
      * @return
      */
+    @ApiOperation(value = "添加角色",notes = "", produces = "application/json")
     @PostMapping
     public ResponseModel addRole(RoleModel roleModel) throws Exception{
         return ResponseHelper.buildResponseModel(roleService.addRoleAndPermission(roleModel));
@@ -85,6 +116,7 @@ public class RoleController {
     /**
      * 修改角色信息
      */
+    @ApiOperation(value = "修改角色信息",notes = "", produces = "application/json")
     @PutMapping
     public ResponseModel updateRole(RoleModel roleModel) throws Exception{
         roleService.updateRoleInfo(roleModel);
