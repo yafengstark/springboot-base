@@ -7,12 +7,24 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 /**
  * @author liugh
  * @since on 2018/5/8.
  */
 public class DateTimeUtil {
+
+    public static void main(String[] args){
+        System.out.println("test");
+        Date date = new Date();
+        date.setTime(1529981271139L);
+        System.out.println("时间" + formatDateTimetoString(date));
+
+        System.out.println("当前时间：" + new Date().getTime());
+
+    }
+
     /**
      *  G    Era    标志符            Text    公元
      y    年                    Year    1996; 96

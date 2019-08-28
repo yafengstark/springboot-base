@@ -95,6 +95,7 @@ public class MyRealm extends AuthorizingRealm {
         // 解密获得username，用于和数据库进行对比
         String userNo = JWTUtil.getUserNo(token);
         if (userNo == null) {
+
             throw new UnauthorizedException("token invalid");
         }
         User userBean = userService.selectById(userNo);

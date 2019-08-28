@@ -42,15 +42,17 @@ public class SwaggerConfig {
         aParameters.add(aParameterBuilder.build());
         return new Docket(DocumentationType.SWAGGER_2).groupName("v1").select()
                 .apis(RequestHandlerSelectors.basePackage("com.liugh.controller"))
-                .paths(PathSelectors.ant("/**")).build().apiInfo(apiInfo1()).globalOperationParameters(aParameters);
+                .paths(PathSelectors.ant("/**")).build()
+                .apiInfo(apiInfo1()).globalOperationParameters(aParameters);
     }
 
 
     private ApiInfo apiInfo1() {
+
         return new ApiInfoBuilder()
-                .title("liugh-parent的Server端 APIs")
-                .contact("liugh")
-                .version("v0.01")
+                .title("后端脚手架 的Server端 APIs")// 网页标题
+                .contact("tony")//
+                .version("v0.0.1")
                 .build();
     }
 

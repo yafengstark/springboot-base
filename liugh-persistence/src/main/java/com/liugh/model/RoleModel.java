@@ -4,12 +4,13 @@ import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ *
  * </p>
  *
  * @author liugh
  * @since 2018-06-30
  */
+
 public class RoleModel {
     private String roleName;
     private String roleCode;

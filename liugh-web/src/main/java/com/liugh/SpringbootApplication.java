@@ -15,7 +15,7 @@ import org.springframework.cache.annotation.EnableCaching;
  */
 @SpringBootApplication
 @MapperScan("com.liugh.mapper")
-@EnableCaching
+@EnableCaching // 使用 @EnableCaching即可完成简单的缓存功能
 public class SpringbootApplication  {
 	public static void main(String[] args) {
         SpringApplication.run(SpringbootApplication.class, args);

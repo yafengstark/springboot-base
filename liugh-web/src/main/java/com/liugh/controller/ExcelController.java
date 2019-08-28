@@ -9,6 +9,8 @@ import com.liugh.config.ResponseHelper;
 import com.liugh.config.ResponseModel;
 import com.liugh.model.Student1;
 import com.liugh.model.Student2;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -26,11 +28,13 @@ import java.util.*;
                                 $serial_number    	  插入序号标记             -
  *
  */
+@Api(description = "Excel管理")
 @RestController
 @RequestMapping("/excel")
 public class ExcelController {
 
 
+    @ApiOperation(value = "导出内容到excel文件中", notes = "有excel模板")
     @Pass
     @GetMapping(value = "/testObject2Excel")
     public ResponseModel testObject2Excel() throws Exception{

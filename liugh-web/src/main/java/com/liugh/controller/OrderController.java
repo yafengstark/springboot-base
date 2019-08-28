@@ -8,6 +8,8 @@ import com.liugh.enums.OrderAction;
 import com.liugh.enums.OrderType;
 import com.liugh.model.OrderModel;
 import com.liugh.service.IOrderService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author liugh
  * @since 2018-10-17
  */
+@Api(description = "订单模块")
 @RestController
 public class OrderController {
 
@@ -32,6 +35,7 @@ public class OrderController {
      * @return
      * @throws Exception
      */
+    @ApiOperation(value = "发货")
     @PutMapping(value = "/deliver/{orderType}")
     public ResponseModel<Order> updateDeliver(@PathVariable String orderType, @RequestBody OrderModel orderModel)
             throws Exception {

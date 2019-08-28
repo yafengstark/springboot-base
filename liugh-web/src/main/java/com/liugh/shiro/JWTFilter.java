@@ -69,7 +69,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             try {
                 executeLogin(request, response);
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
                 responseError(request, response);
             }
         }
